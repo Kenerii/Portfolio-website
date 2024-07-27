@@ -1,0 +1,34 @@
+/*portfolio.css */
+
+div#casestudy {
+    width: 600px;
+    margin: 2em auto;
+    text-align: left;
+    font-family: sans-serif;
+    line-height: 1.4em;
+    
+}
+
+div#casestudy b {
+    color: dodgerblue;
+    display: block;
+    margin-bottom: 4px;
+}
+
+div#navigation {
+    text-align: center;
+    margin: 2em 0;
+}
+
+div#navigation a {
+    text-decoration: none;
+}
+
+div#navigation img {
+    background-color: dodgerblue;
+    width: 49px;
+    height: 49px;
+    padding: 10px;
+    margin: 4px;
+    border-radius: 20%;
+}

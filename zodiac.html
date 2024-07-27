@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    Kevin Neri, Chinese Zodiac, 19 Sept 2019.
+    -->
+    <meta charset='utf-8' />
+    <title>Chinese Zodiac</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body {text-align: center;font-family: Avenir, sans-serif;
+        background-color: #FF5252;}
+        table { width: 90%; margin: 0 auto;
+        border-collapse: collapse; color: gold;
+        }
+        h1 { color: gold;}
+        td, th {border: 1px solid black; padding: 6px 12px;
+        width: 8.33%;}
+        th { background-color: #D92525; color: gold}
+        #controls {margin: 2em;}
+        #message {width: 40%; display: inline-block;
+        text-align: left; margin-left: 1em;
+        }
+         div#casestudy b {
+            color: gold;
+             line-height: 1.4em;
+        }
+        div#navigation img {
+            background-color: gold;
+        }
+       
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+    
+</head>
+
+<body>
+    <h1>Chinese Zodiac</h1>
+    <!-- page content will go here -->
+    
+    <div id="controls">
+        <input type="text" size="6" id="user"/>
+        <button id="lookup">Lookup</button>
+        <span id="message"></span>
+    </div>
+         
+    <table id="years">
+    </table>
+ <div id="casestudy">
+        <p><b>Objective:</b> Creating a Chinese Zodiac table and search bar through javascript for people to find out what zodiac sign they are.</p>
+        <p><b>Problem:</b> Having people go through a hassle to search up their friends birthdays rather than having access to a chart and a search bar on your phone.</p>
+        <p><b>Solution:</b> Creating the javascript through html with all the calculations done to have any year be searched up through the search bar.</p>
+    </div> 
+    
+     
+    <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_black-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_black-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_black-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+    
+    <script type='text/javascript'>
+    // scripts will go here
+        var animals = [
+            "Rat", "Ox", "Tiger", "Rabbit", "Dragon", "Snake", "Horse", "Goat",
+            "Monkey", "Rooster", "Dog", "Pig"        
+        ];
+        
+        drawTheYears();
+        
+       // alert (animalFromYear(1944));
+        document.getElementById("lookup").onclick = lookupAnimal
+            
+        function lookupAnimal(e) {
+                var year = parseInt 
+                (document.getElementById("user").value);
+                var animal = animalFromYear(year);
+                document.getElementById("message").innerHTML =
+                        year + " is the year of the " + animal + ".";
+            
+            }
+        
+            function animalFromYear(year) {
+                var index = ((year % 12) + 8) % 12;
+                return animals[index];
+            }
+        
+        function drawTheYears(){
+            var tableContent = "";
+             
+            tableContent+="<tr>";
+            for (var i=0; i<animals.length; i++){
+                tableContent += "<th>" + animals[i] + "</th>";
+            }
+                tableContent += "</tr>\n";
+            
+            for (var year=1948; year<2031; year+=12){
+                tableContent += "<tr>";
+                
+                for(var i=0; i<12; i++){
+                    tableContent += "<td>" + (year+i) + "</td>";
+                }
+                    
+                    tableContent+="</tr>\n";
+            }
+            document.getElementById("years").innerHTML = tableContent;
+        }
+
+    </script>
+    <p>Copyright &copy; 2023 Kevin Neri</p>
+</body>
+</html>

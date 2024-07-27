@@ -1,0 +1,75 @@
+<svg width='400' height='400' viewBox='0 0 400 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+        <linearGradient id="ring"
+                        x1="0" y1="0"
+                        x2="0" y2="1">
+            <stop offset="0" stop-color="#f4f4f4"/>
+            <stop offset="1" stop-color="#ccc"/>
+        </linearGradient>
+        <radialGradient id="blue"
+                        cx="50%" cy="40%" r="40%">
+        <stop offset="0" stop-color="#7dd"/>
+        <stop offset="1" stop-color="#26d"/>
+        </radialGradient>
+    <filter id="f3" x="0" y="0" width="200%" height="200%">
+        <feOffset result="offOut" in="SourceAlpha" dx="2" dy="2" />
+        <feGaussianBlur result="blurOut" in="offOut" stdDeviation="2" />
+        <feBlend in="SourceGraphic" in2="blurOut" mode="normal" />
+        </filter>
+             
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    
+    <circle cx="200" cy="200" r="190" fill="url(#ring)"/>
+    
+    <circle cx="200" cy="200" r="175" fill="url(#blue)"/>
+    
+    <g id="deg22">
+    <g id="deg45">
+    <g id="deg90">
+        <g id="deg180">
+        <g id="ticks" >
+        <polyline points="200 35 200 65"
+                  stroke="lightgray"
+                  stroke-width="6"
+                  stroke-linecap="round" />
+        <polyline points="200 35 200 50"
+                  stroke="lightgray"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                  transform="rotate(5.625 200 200)" />
+           </g>
+        <use xlink:href="#ticks"
+             transform="rotate(180 200 200)"/>
+            </g>
+        <use xlink:href="#deg180"
+             transform="rotate(90 200 200)"/>
+        </g>
+    <use xlink:href="#deg90"
+         transform="rotate(45 200 200)"/>
+        </g>
+    <use xlink:href="#deg45"
+         transform="rotate(22.5 200 200)"/>
+    </g>
+    <use xlink:href="#deg22"
+         transform="rotate(11.5 200 200)"/>
+    <g id="needle" transform="rotate(45 200 200)"
+       filter="url(#f3)">
+    <polygon points="200 200 200 35 230 200 z"
+             fill="#c00"/>
+        <polygon points="200 200 200 365 230 200 z"
+                 fill="#999"/>
+        <polygon points="200 200 200 365 170 200 z"
+                 fill="#ddd"/>
+        <polygon points="200 200 200 35 170 200 z"
+                 fill="#e55"/>
+    </g>
+    
+</svg>

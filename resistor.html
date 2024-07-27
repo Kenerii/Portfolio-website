@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    Kevin Neri, Resistor Color, Sept 25
+    -->
+    <meta charset='utf-8' />
+    <title>Resistor Color Code</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body {text-align: center; background-color: lightblue;}
+        h1 { font-size: 1.4em; }
+        div#keypad {
+          width: 300px;
+           /* border: 1px solid red;*/
+            margin: 1em auto;
+        }
+          div#keypad button {
+            width: 72px;
+            height: 72px;
+            background-color: pink;
+            border: none;
+            margin: 4px 2px;
+            color: white;
+            font-size: 24px;
+            box-shadow:  1px 1px 3px gray;
+        }
+        div#readout div {
+            width: 30px;
+            height: 68px;
+            background-color: #ca8;
+            display: inline-block;
+            margin: 0 -2px;
+        }
+        div#result {
+            font-size: 2em;
+            margin: 0.5em 0;
+        }
+        @media screen and (max-height: 500px){
+            div#keypad {width: 360px; margin: 0.5em auto;}
+            div#keypad button {width: 49px; height: 49px;}
+            div#readout div {height: 49px;}
+            div#result {margin:0.25em 0 0.1em;
+            font-size: 1.5em;}
+            }
+        }
+
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Resistor Color Code</h1>
+    <!-- page content will go here -->
+<div id="readout">
+    <div class="bk"></div>
+    <div id="band1"></div>
+    <div class="bk"></div>
+    <div id="band2"></div>
+    <div class="bk"></div>
+    <div id="band3"></div>
+    <div class="bk"></div>
+    <div class="bk"></div>
+</div>
+<div id="result">&nbsp;</div>
+<div id="keypad">
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&nbsp;</button>
+    <button >&lt;</button>
+    <button >X</button>
+    </div>
+    
+     <div id="casestudy">
+        <p><b>Objective:</b> Creating a resistor color code with 10 different colors to make different color schemes to get the correct ohms.</p>
+        <p><b>Problem:</b> Getting the correct ohm units according to the color.</p>
+        <p><b>Solution:</b>To be able to restart color schemes with a button instead of refreshing the web page and being able to delete a color if making an error. </p>
+    </div> 
+    
+     
+    <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+    
+    <script type='text/javascript'>
+    // scripts will go here
+        
+        var colors = [
+            "black", "brown", "red", "orange", "yellow", "green", "blue", "violet", "gray", "white", "black", "black"
+        ];
+        
+        
+        function get(id) {
+            return document.getElementById(id);
+        }
+        
+        var bands = [ get("band1"),
+                      get("band2"),
+                      get("band3"), ];
+        var whichBand = 0;
+        var numbers = [ -1,-1,-1,-1 ];
+        
+        function setupButtons() {
+            var buttons = document.getElementById("keypad")
+            .getElementsByTagName("button");
+        //alert (buttons.length);
+            for (var i=0; i<buttons.length; i++) {
+                buttons[i].style.backgroundColor = colors[i];
+                buttons[i].id = "key" + i;
+                buttons[i].onclick = buttonPressed;
+            }
+        }
+        function buttonPressed(e){
+            console.log(e.currentTarget.id);
+            var n = parseInt(e.currentTarget.id.substr(3));
+            console.log (n);
+            if (n == 11){
+                clear();
+            }
+            else if (n == 10) {
+                backspace();
+            }
+            else {
+            bands[whichBand].style.backgroundColor = 
+                e.currentTarget.style.backgroundColor;
+                numbers[whichBand] = n;
+                if (whichBand == 2){
+                    calculate ();
+                } 
+                else if (whichBand == 0) {
+                    get("band2").style.backgroundColor = "#ca8";
+                    get("band3").style.backgroundColor = "#ca8";
+                    get("result").innerHTML = "&nbsp;";
+                }
+                whichBand++;
+                whichBand %= 3;
+            }
+        }
+        
+        function calculate(){
+          var a = numbers [0];
+          var b = numbers [1];
+          var c = numbers [2];
+          var ohms = (a * 10 + b) * Math.pow(10,c);
+          get('result').innerHTML = kmg(ohms);
+            //ohms.toLocaleString();
+           }
+        function kmg(n){
+            if (n>1000000000){
+                return (n / 1000000000) + "G&Omega;";
+            }
+            else if (n > 1000000){
+                return (n / 1000000) + "M&Omega;";
+            }
+            else if (n > 1000){
+                return (n / 1000) + "K&Omega;";
+            }
+            else {
+                return n + "&Omega;";
+            }
+        }
+        
+        function clear(){
+            numbers = [-1,-1,-1];
+            get("band1").style.backgroundColor = "#ca8";
+            get("band2").style.backgroundColor = "#ca8";
+            get("band3").style.backgroundColor = "#ca8";
+            whichBand = 0;
+            get("result").innerHTML = "&nbsp;";
+            
+            
+        }
+        
+        function backspace(){
+            if (whichBand == 1){
+                clear();
+            }
+            else if (whichBand == 2){
+                //remove 2nd band
+                get("band2").style.backgroundColor = "#ca8";
+                whichBand = 1;
+            }
+           else if (numbers[2]!= -1){
+                get("band3").style.backgroundColor = "#ca8";
+               whichBand = 2;
+               get("result").innerHTML = "&nbsp;";
+           }
+            else {
+                //just loaded, do nothing
+            }
+        }
+        
+        setupButtons();
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+
+    </script>
+            <p>Copyright &copy; 2023 Kevin Neri</p>
+
+</body>
+</html>

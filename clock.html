@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    Kevin Neri, Oct 9, Analog Clock
+    -->
+    <meta charset='utf-8' />
+    <title>Analog Clock</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body {text-align: center; font-family: sans-serif; background-color: skyblue;}
+        button { width: 48px; height: 48px; border: none; border-radius: 5px; margin: 2px;}
+         div#casestudy b {
+            color: blue;
+             line-height: 1.4em;
+        }
+         div#navigation img {
+            background-color: blue;
+             
+        }
+
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Analog Clock</h1>
+    <!-- page content will go here -->
+    
+    <svg width='400' height='400' viewBox='0 0 400 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    <rect x='0' y='0' width='400' height='400' fill='wheat' id="bk" />
+    
+    <g id="fifteen">
+    <g id="five">
+    <polyline points="200 50 200 65" id="large"
+              stroke="black"    stroke-width="4"/>
+    <polyline points="200 50 200 60" id="small"
+              stroke="black"    stroke-width="2" transform="rotate(6 200 200)"/>
+    <use xlink:href="#small" transform="rotate(6 200 200)" />
+    <use xlink:href="#small" transform="rotate(12 200 200)" />
+    <use xlink:href="#small" transform="rotate(18 200 200)" />
+        </g>
+    <use xlink:href="#five" transform="rotate(30 200 200)" />
+    <use xlink:href="#five" transform="rotate(60 200 200)" />
+        </g>
+        <use xlink:href="#fifteen" transform="rotate(90 200 200)" />
+        <use xlink:href="#fifteen" transform="rotate(180 200 200)" />
+        <use xlink:href="#fifteen" transform="rotate(270 200 200)" />
+        
+        <polyline points="200 100 200 230"  id="hour"  stroke="black"  stroke-width="3"/>
+        <polyline points="200 65 200 230"  id="minute"  stroke="black"  stroke-width="3" 
+                  transform="rotate(22 200 200)"/>
+        <polyline points="200 65 200 230"  id="second"  stroke="red"  stroke-width="2"
+                  transform="rotate(67 200 200)"/>
+        
+        <circle cx="200" cy="200" r="8" fill="red"/>
+        <circle cx="200" cy="200" r="4" fill="gray"/>
+        
+        
+
+</svg>
+    <p>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+    
+    </p>
+    <div id="casestudy">
+        <p><b>Objective:</b> Creating an analog clock through SVG with different color perspectives.</p>
+        <p><b>Problem:</b> Having each hand move at the correct speed while also being able to change the color scheme for personal desires.</p>
+        <p><b>Solution:</b> Each clock color scheme matches with each other as well as having the correct hand speed through SVG calculations.</p>
+    </div> 
+    
+      <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+
+    <script type='text/javascript'>
+    // scripts will go here
+        
+        function get(id) { return document.getElementById(id); }
+        
+        var colorSchemes = [
+            [ 'wheat', 'darkblue'],
+            ['black', 'white'],
+            ['purple', 'white'],
+            ['yellow', 'green'],
+            ['aqua', 'black'],
+            ["blue", "white"],
+            
+        ];
+        
+        setupColors();
+        updateTime();
+        setInterval(updateTime, 100);
+        updateColors();
+        
+        function setupColors() {
+            var buttons = document.getElementsByTagName('button');
+            for (var i=0; i<buttons.length; i++) {
+                buttons [i].style.backgroundColor = colorSchemes[i][0];
+                buttons[i].id = 'b' + i;
+                buttons[i].onclick = changeColor;
+            }
+        }
+        function changeColor(e) {
+            var n = e.currentTarget.id.substr(1);
+            var colorScheme = colorSchemes[n];
+            get('bk').setAttribute("fill", colorScheme[0]);
+            get('minute').setAttribute("stroke", colorScheme[1]);
+            get('hour').setAttribute("stroke", colorScheme[1]);
+            get('small').setAttribute("stroke", colorScheme[1]);
+            get('large').setAttribute("stroke", colorScheme[1]);
+            
+        }
+        
+        function updateTime() {
+            var date = new Date();
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            var msec = date.getMilliseconds();
+            
+            var hourAngle = hour * 30 + minute / 2;
+            var minuteAngle = minute  * 6 + second / 10;
+            var secondAngle = (second + (msec/1000)) * 6;
+            
+            get("hour").setAttribute('transform',
+                                    'rotate(' + hourAngle + ' 200 200)');
+            get("minute").setAttribute('transform',
+                                    'rotate(' + minuteAngle + ' 200 200)');
+            get("second").setAttribute('transform',
+                                    'rotate(' + secondAngle + ' 200 200)');
+            
+        }
+        
+        function updateColors(){
+            get("bk").setAttribute("fill", "blue");
+            get("large").setAttribute("stroke", "white");
+            get("small").setAttribute("stroke", "white");
+            get("hour").setAttribute("stroke", "white");
+            get("minute").setAttribute("stroke", "white");
+        }
+         
+        
+
+  
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </script>
+        <p>Copyright &copy; 2023 Kevin Neri</p>
+
+</body>
+</html>

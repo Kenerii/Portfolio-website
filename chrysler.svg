@@ -1,0 +1,26 @@
+<svg width='400' height='400' viewBox='0 0 400 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- Kevin Neri Sept 10 2019 -->
+
+    <defs>
+    </defs>
+    <g transform="translate(-9 6) scale(1.05)">
+   <polygon points="200 230
+                    88 360
+                    312 360 z"
+            fill="#48c"
+            id="first"/>
+    <use xlink:href="#first"
+         transform="rotate(72 200 200)"/>
+    <use xlink:href="#first"
+         transform="rotate(144 200 200)"/>
+    <use xlink:href="#first"
+         transform="rotate(-72 200 200)"/>
+    <use xlink:href="#first"
+         transform="rotate(-144 200 200)"/>
+        </g>
+
+    
+</svg>

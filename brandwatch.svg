@@ -1,0 +1,58 @@
+<svg width='400' height='400' viewBox='0 0 400 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+<!-- Kevin Neri 9-11-19 -->
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+        <polygon points="200.0 335.0
+                     83.1 267.5
+                     83.1 132.5
+                     200.0 65.0
+                     316.9 132.5
+                     316.9 267.5 z"
+             id="hexagon"/>
+        <clipPath id="lowerright" >
+            <polygon points="30 400 400 0 400 400 z"/>
+        </clipPath>
+     <clipPath id="lowerleft" >
+        <polygon points="0 180 400 365 400 400 0 400 z"/>
+    </clipPath>
+             
+    <clipPath  id="upperright">
+        <polygon  points="150 0 400 0 400 400 375 400 z"/>
+     </clipPath>
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    <!--<rect x='0' y='0' width='400' height='400' fill='beige' /> -->
+    <!--<image xlink:href="Brandwatch_New_Logo.png" width="400" height="400" /> -->
+    
+    <g transform="translate(-92 -92) scale(1.46)">
+    <use xlink:href="#hexagon" fill="#6be"/>
+    <use xlink:href="#hexagon" fill="darkorange"
+         
+         clip-path="url(#lowerright)"/>
+    <use xlink:href="#hexagon" fill="#5c5"
+         clip-path="url(#lowerleft)" />
+    <use xlink:href="#hexagon" fill="#a7a"
+             clip-path="url(#upperright)" />
+
+        <g clip-path="url(#upperright)">
+        <use xlink:href="#hexagon" fill="#f64"
+             clip-path="url(#lowerright)" />
+    </g>
+        
+        
+        <g clip-path="url(#lowerleft)">
+        <use xlink:href="#hexagon" fill="#eb0"
+             clip-path="url(#lowerright)" />
+    
+
+        </g>
+    </g>
+    
+    
+
+</svg>

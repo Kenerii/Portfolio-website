@@ -1,0 +1,29 @@
+<svg width='400' height='400' viewBox='0 0 400 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- Kevin Neri Sept 10 2019 -->
+
+    <defs>
+        <linearGradient id="blue"
+                        x1="o" y1="0"
+                        x2="0" y2="1">
+            <stop offset="0" stop-color="#4bf"/>
+            <stop offset="1" stop-color="#28e"/>
+        </linearGradient>
+                        
+    </defs>
+    
+    <rect x="0" y="0" width="400" height="400" fill="#28e"/>
+    <ellipse cx="200" cy="200" rx="130" ry="120" fill="white"/>
+    <polygon points="0 0 150 0 0 100 z"
+             fill="white"
+             transform="translate(118 243)"/>
+    <polygon points="110 236
+                     180 164
+                     225 200
+                     290 164
+                     220 236
+                     180 200 z"
+             fill="#39e"/>
+</svg>

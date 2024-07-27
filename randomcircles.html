@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    YOUR NAME HERE, date, project name, class, etc.
+    -->
+    <meta charset='utf-8' />
+    <title>Random Circles</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body{ text-align: center;font-family: sans-serif; background-color: lightblue;}
+        p label{ width: 140px; display: inline-block; 
+            text-align: right;
+            margin-right: 8px;
+        }
+        p input{ width: 300px;
+        position: relative; top: 3px;}
+        p span{ width: 60px; display: inline-block;}
+
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Random Circles</h1>
+    <!-- page content will go here -->
+    <svg width='600' height='400' viewBox='0 0 600 400'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    <rect x='0' y='0' width='600' height='400' fill='beige' />
+    
+    <g id="circles"></g>
+</svg>
+    <p>
+        <label>Number of Circles:</label>
+        <input type="range" id="number" min="10" max="200" step="1"
+               value="100" />
+        <span id="numberReadout">100</span>
+    </p>
+    <p>
+        <label>Maximum Radius:</label>
+        <input type="range" id="radius" min="10" max="300" step="1"
+               value="200" />
+         <span id="radiusReadout">200</span>
+    </p>
+    <p>
+        <label>Opacity:</label>
+        <input type="range" id="opacity" min="0.01" max="1.00" step="0.01"
+               value="0.5"/>
+          <span id="opacityReadout">0.5</span>
+        
+                                                                     
+    
+    </p>
+     <div id="casestudy">
+        <p><b>Objective:</b> Creating a square with colorful circles and being able to change the number of circles, the maximum radius and the opacity. </p>
+        <p><b>Problem:</b>Making the toggle sliders work properly according to the correct number.</p>
+        <p><b>Solution:</b>The toggle sliders being the right size for the number range on all 3 options.</p>
+    </div> 
+     
+    <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+
+    <script type='text/javascript'>
+    // scripts will go here
+        
+        var width = 600;
+        var height = 400;
+        var minRadius = 10;
+        var maxRadius = 200;
+        var numCircles = 100;
+        var fillOpacity = 0.5;
+        
+        function get(id){return document.getElementById(id);}
+        
+        drawCircles();
+        get ("number").oninput = numberChanged;
+        get ("radius").oninput = radiusChanged;
+        get ("opacity").oninput = opacityChanged;
+        
+        function numberChanged (e){
+          numCircles = parseInt(get("number").value);
+            get("numberReadout").innerHTML = numCircles;
+            drawCircles();
+        }
+        
+        function radiusChanged(e){
+            maxRadius = parseInt(get("radius").value);
+            get("radiusReadout").innerHTML = maxRadius;
+            drawCircles();
+            
+        }
+        function opacityChanged(e){
+            fillOpacity = parseFloat(get("opacity").value);
+            get("opacityReadout").innerHTML = fillOpacity;
+            drawCircles();
+            
+        }
+        
+        
+        function drawCircles(){
+            var c = "";
+            for (var i=0; i<numCircles; i++){
+               c += drawOneCircle();
+            }
+            get ("circles").innerHTML = c;
+        }
+        function drawOneCircle(){
+            var x = Math.floor(Math.random()*width);
+            var y = Math.floor(Math.random()*height);
+            var r = Math.floor(minRadius + Math.random()*(maxRadius - minRadius));
+            var c = makeRandomColor();
+            // <circle cx="n" cy="n" r="n" fill="n"/>
+            return "<circle cx='" + x +
+                "' cy='" + y +
+                "' r='" + r +
+                "' fill='" + c + 
+                "' fill-opacity='" + fillOpacity + 
+                "' />\n";
+            }
+         function makeRandomColor() {
+            return "#" + randomHexDigit() +
+                         randomHexDigit() +
+                         randomHexDigit();
+            }
+        function randomHexDigit(){
+            var validHexDigits = "0123456789ABCDEF";
+            var randomIndex = 
+                Math.floor(Math.random() * validHexDigits.length);
+            return validHexDigits[ randomIndex];
+        }
+
+    </script>
+    <p>Copyright &copy; 2023 Kevin Neri</p>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+   Kevin Neri, Nov 11 2019, Benzene Ring
+    -->
+    <meta charset='utf-8' />
+    <title>Benzene Ring</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body { text-align: center;background-color: darkseagreen;font-family: Avenir, sans-serif;}
+        h1 {text-align: center;}
+        div#casestudy b {
+            color: green;
+            line-height: 1.4em;
+        }
+         div#navigation img {
+            background-color: green;
+        }
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Benzene Ring</h1>
+    <!-- page content will go here -->
+
+    <script type='text/javascript'>
+    // scripts will go here
+        
+
+    </script>
+</body>
+</html>
+
+
+
+<svg width='600' height='800' viewBox='0 0 600 800'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+    
+    
+    
+
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+         <radialGradient id="red" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="pink"/>
+        <stop offset="1" stop-color="#c00"/>
+              </radialGradient>
+        <radialGradient id="purple" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="thistle"/>
+        <stop offset="1" stop-color="purple"/>
+              </radialGradient>
+        <radialGradient id="green" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="chartreuse"/>
+        <stop offset="1" stop-color="darkgreen"/>
+              </radialGradient>
+        <radialGradient id="orange" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="gold"/>
+        <stop offset="1" stop-color="brown"/>
+              </radialGradient>
+        <radialGradient id="blue" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="#dde"/>
+        <stop offset="1" stop-color="blue"/>
+              </radialGradient>
+        <radialGradient id="teal" cx="30%" cy="30%" r="70%">
+        <stop offset="0" stop-color="aqua"/>
+        <stop offset="1" stop-color="teal"/>
+              </radialGradient>
+        <radialGradient id="black" cx="50%" cy="50%" r="70%" >
+        <stop offset="0" stop-color="#cdc"/>
+        <stop offset=" 0.125" stop-color="#8a8"/>
+        <stop offset="0.25" stop-color="#cdc"/>
+        <stop offset=" 0.375" stop-color="#8a8"/>
+        <stop offset="0.5" stop-color="#cdc"/>
+        <stop offset=" 0.625" stop-color="#8a8"/>
+        <stop offset="0.75" stop-color="#cdc"/>
+        <stop offset=" 0.875" stop-color="#8a8"/>
+        <stop offset="1" stop-color="#cdc"/>
+        
+        </radialGradient>
+        <linearGradient id="left" x1="0.42" y1="0.42" x2="0.58" y2="0.58">
+            <stop offset="0" stop-color="white"/>
+            <stop offset="1" stop-color="black"/>
+         </linearGradient>
+             <linearGradient id="right" x1="0.58" y1="0.42" x2="0.42" y2="0.58">
+            <stop offset="0" stop-color="white"/>
+            <stop offset="1" stop-color="black"/>
+            </linearGradient>
+        <linearGradient id="rect" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0" stop-color="#ccc"/>
+            <stop offset="1" stop-color="#444"/>
+            </linearGradient>
+        
+        
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    <rect x='0' y='0' width='600' height='800' fill='url(#black)' />
+    <!-- polygon points="300.0  500.0
+                    213.4  450.0
+                    213.4  350.0
+                    300.0  300.0
+                    386.6  350.0
+                    386.6  450.0 z"
+             stroke="black"
+             fill="none"/> --> 
+    
+    <g transform="translate(-150 -200) scale(1.5)">
+    <!-- start at 7 o'clock goin clockwise -->
+    <polyline points="300.0  491.0
+                     213.4  441.0" stroke="url(#right)" stroke-width="10"/>
+    <polyline points="300.0  509.0
+                     213.4  459.0" stroke="url(#right)" stroke-width="10"/>
+    <!-- 9 o'clock -->
+    <rect  x="208.4" y="350.0"  fill="url(#rect)" width="10" height="100"/>
+    <!-- 11 o'clock -->
+    <polyline points="213.4  341.0
+                     300.0  291.0" stroke="url(#left)" stroke-width="10"/>
+    <polyline points="213.4  359.0
+                     300.0  309.0" stroke="url(#left)" stroke-width="10"/>
+    <!-- 1 o'clock -->
+     <polyline points="300.0  300.0
+                    386.6  350.0" stroke="url(#right)" stroke-width="10"/>
+    <!-- 3 o'clock -->
+    <rect  x="373.6" y="350.0"  fill="url(#rect)" width="10" height="100"/>
+    <rect  x="389.5" y="350.0"  fill="url(#rect)" width="10" height="100"/>
+    <!-- 5 o'clock -->
+    <polyline points="300.0  500.0
+                      386.6  450.0 z" stroke="url(#left)" stroke-width="10"/>
+    
+    
+    
+    
+    <circle cx="300" cy="500" r="30" fill="url(#red)"/>
+    <circle cx="213.4" cy="450" r="30" fill="url(#orange)"/>
+    <circle cx="213" cy="350" r="30" fill="url(#green)"/>
+    <circle cx="300" cy="300" r="30" fill="url(#teal)"/>
+    <circle cx="386.6" cy="350" r="30" fill="url(#blue)"/>
+    <circle cx="386.6" cy="450" r="30" fill="url(#purple)"/>
+    </g>
+    <text x="300" y="700" text-anchor="middle" font-size="64" font-family="Gabriola" fill="darkgreen">Benzene Ring</text>
+    <text x="590" y="790" text-anchor="end"
+          
+          
+    </svg>
+    <div id="casestudy">
+        <p><b>Objective:</b>  Creating a Benzene ring on SVG in the middle of the rectangle with different color atoms.</p>
+        <p><b>Problem:</b>Having the structure be a specific color with a gradient to make it look realistic. As well as having a gradient on the atoms to contrast with the background.</p>
+        <p><b>Solution:</b>Giving the background the right color scheme to make the ring visible. The text being the same color but darker to make it stand out.</p>
+    </div> 
+  <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+      <p>Copyright &copy; 2023 Kevin Neri</p>
+    </div>

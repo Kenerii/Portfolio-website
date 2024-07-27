@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+   Kevin Neri, Oct 7 2019, Basketball
+    -->
+    <meta charset='utf-8' />
+    <title>Basketball</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        h1{text-align: center;font-family: sans-serif;}
+        body {text-align: center; font-family: sans-serif; background-color:lightskyblue;}
+        svg{width: 900px;}
+        button {
+            width: 48px; height: 48px;
+            border: none;
+            background: linear-gradient(gray,black);
+            color: white;
+            font-size: 24px;
+            border-radius: 8px;
+            margin: 4px;
+            
+        }
+         div#casestudy b {
+             line-height: 1.4em;
+        color: dodgerblue;}
+
+    </style>
+        <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Basketball</h1>
+    <!-- page content will go here -->
+    
+    <p>
+        <button id="slower">&ndash;</button>
+        <button id="faster">+</button>
+        <button class="color pink">&nbsp;</button>
+        <button class="color red">&nbsp;</button>
+        <button class="color yellow">&nbsp;</button>
+        <button class="color green">&nbsp;</button>
+        <button class="color blue">&nbsp;</button>
+        
+    </p>
+    
+    <svg width='1000' height='800' viewBox='0 0 1000 800'
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink= "http://www.w3.org/1999/xlink">
+
+    <!-- the clipping paths and masks will go here -->
+
+    <defs>
+        <clipPath id="c">
+            <circle cx="200" cy="200" r="100" fill="orange"/>
+            </clipPath>
+        <radialGradient id="o" cx="30%" cy="30%" r="70%">
+            <!--
+            <stop offset="0" stop-color="white"/>
+            <stop offset="1" stop-color="darkorange"/>
+-->
+            <stop offset="0" stop-color="black" stop-opacity="0" />
+            <stop offset="1" stop-color="black" stop-opacity="0.3" />
+        </radialGradient>
+    </defs>
+
+    <!-- the shapes and stuff will go here -->
+
+    <rect x='0' y='0' width='1000' height='800' fill='beige' />
+        
+
+    <g clip-path="url(#c)" id="ball">
+    <circle cx="200" cy="200" r="100" fill="pink" id="base"/> 
+    <line x1="200" y1="100" x2="200" y2="300" stroke="black" stroke-width="3"/>
+    <line x1="100" y1="200" x2="300" y2="200" stroke="black" stroke-width="3"/>
+    <circle cx="50" cy="200" r="100" fill="none" stroke="black" stroke-width="3"/>
+    <circle cx="350" cy="200" r="100" fill="none" stroke="black" stroke-width="3"/>
+    </g>
+        <circle cx="200" cy="200" r="100" fill="url(#o)" id="disc"/> 
+
+        
+</svg>
+    
+    <div id="casestudy">
+        <p><b>Objective:</b> Creating a fun and interactive SVG project that allows people to increase and decrease the speed of a bouncing basketball.</p>
+        <p><b>Problem:</b>Having the basketball bouncing on all 4 sides and to have the correct rotation.</p>
+        <p><b>Solution:</b>Basketball bounces from side to side without leaving the margins while being able to change color schemes and increase or decrease the speed.</p>
+    </div> 
+    
+    <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+
+    <script type='text/javascript'>
+    // scripts will go here
+        var ball = document.getElementById("ball");
+        var disc = document.getElementById("disc");
+        var svg = document.getElementsByTagName("svg")[0];
+        var width = svg.getAttribute("width");
+        var height = svg.getAttribute("height");
+        var x = 0;
+        var y = 0;
+        var deltax = 2;
+        var deltay = 1.2;
+        var rot= 0;
+        var deltarot = deltax * 360 / (200 * Math.PI);
+        var mouseIsDown = false;
+        var colorButtons = document.getElementsByClassName("color");
+        
+        for (var i=0; i<colorButtons.length; i++){
+            var c = colorButtons[i].className.substr(6);
+            console.log (c);
+            colorButtons[i].style.background = "none";
+            colorButtons[i].style.backgroundColor = c;
+            colorButtons[i].onclick = changeColor;
+        }
+        
+        
+        document.getElementById("slower").onclick = goSlower;
+        document.getElementById("faster").onclick = goFaster;
+        
+        svg.onmousedown = doMouseDown;
+        svg.onmouseup = doMouseUp;
+        svg.onmousemove = doMouseMove;
+        
+        
+        setInterval(moveBall, 10);
+        
+        function changeColor(e) {
+            document.getElementById("base").setAttribute("fill",
+                                                        e.currentTarget.style.backgroundColor);
+        }
+        
+        function doMouseDown(e) {
+            mouseIsDown = true;
+            console.log (e.clientX, e.clientY);
+            doMouseMove(e);
+        }
+        function doMouseUp(e) {
+            mouseIsDown = false;
+        }
+        function doMouseMove(e) {
+            if (!mouseIsDown) {
+                return;
+            }
+            var mag = Math.sqrt (deltax * deltax + deltay * deltay);
+            var newDeltaX = e.offsetX - x - 200;
+            var newDeltaY = e.offsetY - y - 200;
+            console.log (newDeltaX, newDeltaY);
+            var newMag = Math.sqrt (newDeltaX*newDeltaX + newDeltaY*newDeltaY);
+            var scaleFactor = mag / newMag;
+            deltax = newDeltaX * scaleFactor;
+            deltay = newDeltaY * scaleFactor;
+        }
+        
+        
+        
+        function goSlower(e) {
+            deltax *= 0.707;
+            deltay *= 0.707;
+            deltarot *= 0.707;
+        }
+        
+        function goFaster(e) {
+            deltax *= 1.414;
+            deltay *= 1.414;
+            deltarot *= 1.414;
+        }
+        
+        function moveBall(){
+            if (x >= width-300){
+                deltarot = -Math.sign(deltax) * Math.sign(deltay) * Math.abs(deltarot);
+                deltax = -Math.abs(deltax);
+                 //deltarot = -Math.abs(deltarot);
+            }
+            else if (x <= -100){
+                deltarot = -Math.sign(deltax) * Math.sign(deltay) * Math.abs(deltarot);
+                deltax = Math.abs(deltax);
+                deltarot = Math.abs(deltarot);
+            }
+            if (y >= height-300){
+                deltarot = Math.sign(deltax) * Math.sign(deltay) * Math.abs(deltarot);
+                deltay = -Math.abs(deltay);
+            }
+            else if (y <= -100){
+                deltarot = Math.sign(deltax) * Math.sign(deltay) * Math.abs(deltarot);
+                deltay = Math.abs(deltay);
+            }
+            x+=deltax;
+            y+=deltay;
+            rot += deltarot;
+            ball.setAttribute("transform", "translate("+ x +" " + y +") rotate(" + rot + " 200 200)")
+            disc.setAttribute("transform", "translate(" + x + " " + y + ")");
+        }
+
+    </script>
+    <p>Copyright &copy; 2023 Kevin Neri</p>
+</body>
+</html>

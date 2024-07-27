@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    Kevin Neri, Tic Tac toe, 13 Sept 2019
+    -->
+    <meta charset='utf-8' />
+    <title>Tic Tac Toe</title>
+    <style type='text/css'>
+    /* styles go here */
+        @import "portfolio.css";
+        body{ text-align: center;
+        font-family: "Avenir",sans-serif;
+        background:lightblue;
+        font-size: 18px}
+        div#board button {
+            width: 72px;
+            height: 72px;
+            margin: 6px 4px;
+            background-color: cornflowerblue;
+            border: none;
+            font-size: 40px;
+        }
+        button#newgame {
+            margin: 3em;
+            padding: 6px 3em;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(lightblue,cornflowerblue);
+        }
+         div#casestudy b {
+            
+             line-height: 1.4em;
+
+    </style>
+    <script type="text/javascript" src="navigation.js"></script>
+</head>
+
+<body>
+    <h1>Tic Tac Toe</h1>
+    <!-- page content will go here -->
+    <p id="message">Player X</p>
+    
+<div id="board">
+    <div class="row">
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+    </div>
+    <div class="row">
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+    </div>
+    <div class="row">
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        <button>&nbsp;</button>
+        </div>
+    </div>
+    
+    <button id="newgame">New Game</button>
+        
+ <div id="casestudy">
+        <p><b>Objective:</b> To have a fun and interesting game to play on your phone rather than using a pen and paper. Having automatic response when winning or losing a game by being programmed on SVG.</p>
+        <p><b>Problem:</b> Having the game show whos turn it is just incase the people playing forget.</p>
+        <p><b>Solution:</b>Integrating whos turn it is on top of the game with also announcing who the winner is. Also having a “New Game” button to restart the game rather than refreshing the web page.</p>
+    </div> 
+    
+     
+    <div id="navigation">
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-left.png"
+                 alt="previous"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-home.png" 
+                 alt="home"/>
+        </a>
+        <a href="index.html">
+            <img src="navicons/icon_white-arrow-right.png" 
+                 alt="next"/>
+        </a>
+    </div>
+    
+    <script type='text/javascript'>
+    // golbal variables
+        var buttons = 
+            document.getElementById ("board").
+            getElementsByTagName("button");
+            // alert(buttons.length);
+        var player = "X";
+        var gameStopped = false;
+        
+        for (var i=0; i<buttons.length; i++){
+            buttons[i].onclick =
+            boardButtonClicked; 
+        }
+        document.getElementById("newgame").onclick = newGame;
+        
+        function newGame (e) {
+            //alert ("yo");
+            for (var i=0; i<buttons.length; i++) {
+                buttons[i].innerHTML = "&nbsp";
+            }
+            gameStopped = false;
+            document.getElementById("message").innerHTML = "&nbsp;";
+                    "Player " + player;
+        }
+        
+        function boardButtonClicked(e) {
+            // check whether square alredy taken
+            if (e.currentTarget.textContent == "X") {
+                return;
+            }
+             if (e.currentTarget.textContent == "O") {
+                return;
+            }
+            // check whether game stopped
+            if (gameStopped) {
+                return;
+                }
+            // let the player have this square
+            e.currentTarget.textContent = player;
+            //win?
+            if (playerWon()){
+                document.getElementById("message").textContent = 
+                    "Player " + player + " won!"
+                gameStopped = true;
+            }
+            //draw?
+            if (isaDraw()){
+                document.getElementById("message").textContent = "Draw!!"
+                gameStopped = true;
+            }
+            // switch to the other player
+            if(player == "X") {
+                player = "O";
+            } else {
+                player = "X";
+            }
+            if (!gameStopped) {
+            document.getElementById("message").textContent = 
+                "Player " + player;
+            }
+        }
+        function isaDraw(){
+            //1. board is full
+            for (var i=0; i<buttons.length; i++){
+                if (buttons[i].textContent !="X"&&
+                   buttons[i].textContent !="O"){
+                    return false;
+                }
+            }
+            //2. X did not win
+            //3. O did not win
+            if (playerWon()){
+                return false;
+            }
+             return true;
+        }
+        
+        function playerWon() {
+            var wins = [
+                [0,1,2],
+                [3,4,5],
+                [6,7,8],
+                [0,3,6],
+                [1,4,7],
+                [2,5,8],
+                [0,4,8],
+                [2,4,6],
+            ];
+            for (w = 0; w<wins.length; w++) {
+                var win = wins [w];
+                if (buttons[win[0]].textContent == player &&
+                    buttons[win[1]].textContent == player &&
+                    buttons[win[2]].textContent == player){
+                    return true;
+                    }
+                }
+            return false;
+            
+        }
+
+    </script>
+        <p>Copyright &copy; 2023 Kevin Neri</p>
+</body>
+</html>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
